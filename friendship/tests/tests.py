@@ -173,7 +173,10 @@ class FriendshipModelTests(BaseTestCase):
         self.assertEqual(Friend.objects.unread_request_count(self.user_steve), 1)
 
         # Steve also wants to be friends with Bob before Bob replies
-        req2 = Friend.objects.add_friend(self.user_steve, self.user_bob)
+        with self.assertRaises(AlreadyExistsError):
+            Friend.objects.add_friend(self.user_steve, self.user_bob)
+
+        # req2 = Friend.objects.add_friend(self.user_steve, self.user_bob)
 
         # Ensure they aren't friends at this point
         self.assertFalse(Friend.objects.are_friends(self.user_bob, self.user_steve))
