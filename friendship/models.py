@@ -67,7 +67,6 @@ def bust_cache(type, user_pk):
 
 class FriendshipRequest(models.Model):
     """ Model to represent friendship requests """
-    id = models.AutoField(primary_key=True, autoincrement=True)
     from_user = models.ForeignKey(
         AUTH_USER_MODEL,
         related_name='friendship_requests_sent')
